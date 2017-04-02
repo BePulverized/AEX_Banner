@@ -15,7 +15,7 @@ public class Fonds implements IFonds {
     }
     @Override
     public String getNaam() {
-        return null;
+        return naam;
     }
 
     @Override

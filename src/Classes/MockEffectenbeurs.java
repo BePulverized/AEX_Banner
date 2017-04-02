@@ -17,19 +17,21 @@ public class MockEffectenbeurs implements IEffectenbeurs {
 
     public MockEffectenbeurs()
     {
+        timer = new Timer();
         rnd = new Random();
         fondsList = new ArrayList<>();
-        fondsList.add(new Fonds("ABN AMRO", 22.775));
-        fondsList.add(new Fonds("ASML", 124.000));
-        fondsList.add(new Fonds("DSM", 63.500));
-
-        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                fonds = (Fonds) fondsList.get(rnd.nextInt());
+                fondsList.add(new Fonds("ABN AMRO", rnd.nextInt(100)));
+                fondsList.add(new Fonds("ASML", rnd.nextInt(100)));
+                fondsList.add(new Fonds("DSM", rnd.nextInt(100)));
             }
-        }, 0, 10000);
+        },0, 10000);
+
+
+
+
     }
     @Override
     public List<IFonds> getKoersen() {

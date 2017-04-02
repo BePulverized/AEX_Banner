@@ -27,9 +27,9 @@ public class AEXBanner extends Application{
     private BannerController controller;
     private AnimationTimer animationTimer;
 
-    public AEXBanner(Text text)
+    public AEXBanner()
     {
-        this.text = text;
+
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -77,13 +77,8 @@ public class AEXBanner extends Application{
     }
 
     public void setKoersen(String koersen) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                text.setText(koersen);
-                textLength = text.getLayoutBounds().getWidth();
-            }
-        });
+            text.setText(koersen);
+            textLength = text.getLayoutBounds().getWidth();
 
     }
 

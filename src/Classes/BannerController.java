@@ -26,6 +26,8 @@ public class BannerController {
             @Override
             public void run() {
                 // TODO
+                setAllKoersen(effectenbeurs.getKoersen());
+
             }
         }, 0, 2000);
 
@@ -37,6 +39,18 @@ public class BannerController {
         // Stop simulation timer of effectenbeurs
         // TODO
 
+    }
+
+    public void setAllKoersen(List<IFonds> koersen)
+    {
+        if(koersen != null) {
+            this.koersen = koersen;
+            String koersenAll = " ";
+            for (IFonds fonds : koersen) {
+                koersenAll = koersenAll + fonds.getNaam() + ": ";
+            }
+            banner.setKoersen(koersenAll);
+        }
     }
 
 }
