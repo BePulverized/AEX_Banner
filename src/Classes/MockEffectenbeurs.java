@@ -1,5 +1,8 @@
 package Classes;
 
+import Classes.RMI.IRemotePropertyListener;
+
+import java.rmi.RemoteException;
 import java.util.*;
 
 /**
@@ -20,14 +23,7 @@ public class MockEffectenbeurs implements IEffectenbeurs {
         timer = new Timer();
         rnd = new Random();
         fondsList = new ArrayList<>();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                fondsList.add(new Fonds("ABN AMRO", rnd.nextInt(100)));
-                fondsList.add(new Fonds("ASML", rnd.nextInt(100)));
-                fondsList.add(new Fonds("DSM", rnd.nextInt(100)));
-            }
-        },0, 10000);
+
 
 
 
@@ -36,5 +32,15 @@ public class MockEffectenbeurs implements IEffectenbeurs {
     @Override
     public List<IFonds> getKoersen() {
         return fondsList;
+    }
+
+    @Override
+    public void subscribeRemoteListener(IRemotePropertyListener listener, String property) throws RemoteException {
+
+    }
+
+    @Override
+    public void unsubscribeRemoteListener(IRemotePropertyListener listener, String property) throws RemoteException {
+
     }
 }

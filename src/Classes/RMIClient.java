@@ -11,13 +11,14 @@ import java.util.TimerTask;
  * Created by BePulverized on 10-4-2017.
  */
 public class RMIClient {
-    private static final String bindingName = "AexBanner";
+    private static final String bindingName = "AEXBanner";
     private Registry registry = null;
-    private IBanner banner;
+    private IEffectenbeurs effectenBeurs;
+    private BannerController controller;
 
 
-    public RMIClient(String ipAddress, int portNumber) {
-
+    public RMIClient(String ipAddress, int portNumber, BannerController controller) {
+        this.controller = controller;
         System.out.println("Client: IP Address: " + ipAddress);
         System.out.println("Client: Port number " + portNumber);
 
@@ -29,39 +30,43 @@ public class RMIClient {
             this.registry = null;
         }
 
-        if(this.registry != null) {
+        if (this.registry != null) {
             System.out.println("Client: Registry located");
         } else {
             System.out.println("Client: Cannot locate registry");
             System.out.println("Client: Registry is null pointer");
         }
 
-        if(registry != null) {
+        if (registry != null) {
             try {
-                banner = (IBanner) registry.lookup(bindingName);
+                effectenBeurs = (IEffectenbeurs) registry.lookup(bindingName);
+                controller.setEffectenbeurs(effectenBeurs);
+                controller.subscribeRemoteListener();
             } catch (RemoteException var4) {
                 System.out.println("Client: Cannot bind beurs");
                 System.out.println("Client: RemoteException: " + var4.getMessage());
-                banner = null;
+                effectenBeurs = null;
             } catch (NotBoundException var5) {
                 System.out.println("Client: Cannot bind beurs");
                 System.out.println("Client: NotBoundException: " + var5.getMessage());
-                banner = null;
+                effectenBeurs = null;
             }
         }
 
 
-
-
-        if(this.banner != null) {
+        if (this.effectenBeurs != null) {
             System.out.println("Client: Beurs bound");
         } else {
             System.out.println("Client: Beurs is null pointer");
         }
+    }
 
-
-
+    public IEffectenbeurs getEffectenbeurs() {
+        return effectenBeurs;
     }
 
 
 }
+
+
+

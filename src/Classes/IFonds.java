@@ -1,5 +1,7 @@
 package Classes;
 
+import java.io.Serializable;
+
 /**
  * Created by BePulverized on 2-4-2017.
  */

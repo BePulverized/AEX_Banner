@@ -1,9 +1,11 @@
 package Classes;
 
+import java.io.Serializable;
+
 /**
  * Created by BePulverized on 2-4-2017.
  */
-public class Fonds implements IFonds {
+public class Fonds implements IFonds, Serializable{
 
     private String naam;
     private double koers;
@@ -20,6 +22,12 @@ public class Fonds implements IFonds {
 
     @Override
     public double getKoers() {
-        return 0;
+        return koers;
     }
+
+    public void setKoers(double koers){
+        this.koers = koers;
+    }
+
+
 }

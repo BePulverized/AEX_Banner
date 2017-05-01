@@ -16,23 +16,23 @@ public class RMIServer {
     private static final int portNumber = 1099;
     private static final String bindingName = "AEXBanner";
     private Registry registry = null;
-    private BannerController banner;
+    private IEffectenbeurs effectenBeurs;
 
     public RMIServer() {
         System.out.println("Server: Port number 1099");
         try {
-            this.banner = null;
-            System.out.println("Server: Student administration created");
+            this.effectenBeurs = new Effectenbeurs();
+            System.out.println("Server: effectenbeurs created");
         } catch (RemoteException var4) {
-            System.out.println("Server: Cannot create student administration");
+            System.out.println("Server: Cannot create effectenbeurs");
             System.out.println("Server: RemoteException: " + var4.getMessage());
-
+            this.effectenBeurs = null;
         }
 
         System.out.println("Server: Effectenbeurs created");
 
         try {
-            this.registry = LocateRegistry.createRegistry(1099);
+            this.registry = LocateRegistry.createRegistry(portNumber);
             System.out.println("Server: Registry created on port number 1099");
         } catch (RemoteException var3) {
             System.out.println("Server: Cannot create registry");
@@ -41,7 +41,7 @@ public class RMIServer {
         }
 
         try {
-            this.registry.rebind(bindingName, this.banner);
+            this.registry.rebind(bindingName, this.effectenBeurs);
         } catch (RemoteException var2) {
             System.out.println("Server: Cannot bind banner");
             System.out.println("Server: RemoteException: " + var2.getMessage());
